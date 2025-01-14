@@ -1,6 +1,7 @@
 import os
 import zipfile
 import tensorflow as tf
+tf.get_logger().setLevel('ERROR') 
 from flask import Flask, request, render_template, jsonify
 from PIL import Image
 import numpy as np
