@@ -56,8 +56,10 @@ def classify():
         confidence = np.max(predictions) * 100  # Convert to percentage
 
         return render_template('index.html', category=category, confidence=confidence)
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # For production deployment, set debug=False and consider using a production-ready server like Gunicorn.
+    app.run(debug=True, host='0.0.0.0', port=5000)  # This makes your app accessible externally for deployment
