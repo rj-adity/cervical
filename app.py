@@ -9,7 +9,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Define paths
-MODEL_ZIP_PATH = 'cancer_classifier_model.zip'
+MODEL_ZIP_PATH = 'cancer_classifier.zip'
 MODEL_DIR = 'model'  # Directory where the model will be extracted
 
 # Unzip the model if not already unzipped
