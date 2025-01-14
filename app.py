@@ -1,6 +1,7 @@
 import os
 import zipfile
 import tensorflow as tf
+tf.get_logger().setLevel('ERROR') 
 from flask import Flask, request, render_template, jsonify
 from PIL import Image
 import numpy as np
@@ -8,7 +9,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Define paths
-MODEL_ZIP_PATH = 'cancer_classifier_model.zip'
+MODEL_ZIP_PATH = 'cancer_classifier.zip'
 MODEL_DIR = 'model'  # Directory where the model will be extracted
 
 # Unzip the model if not already unzipped
@@ -56,8 +57,10 @@ def classify():
         confidence = np.max(predictions) * 100  # Convert to percentage
 
         return render_template('index.html', category=category, confidence=confidence)
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # For production deployment, set debug=False and consider using a production-ready server like Gunicorn.
+    app.run(debug=True, host='0.0.0.0', port=5000)  # This makes your app accessible externally for deployment
